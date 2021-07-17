@@ -1,0 +1,4 @@
+{
+  # specify rate in requests/second
+  rate: 1000
+}

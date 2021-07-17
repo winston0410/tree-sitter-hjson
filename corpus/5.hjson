@@ -1,0 +1,8 @@
+{
+  md:
+    '''
+    First line.
+    Second line.
+      This line is indented by two spaces.
+    '''
+}

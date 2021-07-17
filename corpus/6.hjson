@@ -1,0 +1,5 @@
+{
+  "key name": "{ sample }"
+  "{}": " spaces at the start/end "
+  this: is OK though: {}[],:
+}
