@@ -1,0 +1,25 @@
+{
+  "name": "tree-sitter-hjson",
+  "version": "0.1.0",
+  "description": "HJSON grammar for tree-sitter",
+  "homepage": "https://github.com/winston0410/tree-sitter-hjson",
+  "main": "bindings/node",
+  "keywords": [
+    "tree-sitter",
+    "parser",
+    "hjson"
+  ],
+  "author": "Hugo Sum",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.14.2",
+    "tree-sitter-json": "^0.19.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.19.2"
+  },
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp build",
+    "test": "tree-sitter test"
+  }
+}
