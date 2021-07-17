@@ -1,7 +1,7 @@
 const json = require("tree-sitter-json/grammar");
 
 module.exports = grammar(json, {
-  name: "jsonc",
+  name: "hjson",
 
   extras: ($, original) => [...original, $.comment],
 
@@ -10,7 +10,11 @@ module.exports = grammar(json, {
 
     comment: ($) =>
       token(
-        choice(seq("#", /.*/),seq("//", /.*/), seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"))
+        choice(
+          seq("#", /.*/),
+          seq("//", /.*/),
+          seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/")
+        )
       ),
   },
 });
