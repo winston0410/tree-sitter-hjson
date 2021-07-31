@@ -1,0 +1,26 @@
+===================
+Arrays without comma
+===================
+
+[
+  345
+  10.1
+  10
+  -10
+  null
+  true
+  false
+  { "stuff": "good" }
+]
+
+---
+
+(document (array
+  (number)
+  (number)
+  (number)
+  (number)
+  (null)
+  (true)
+  (false)
+  (object (pair (string (string_content)) (string (string_content))))))

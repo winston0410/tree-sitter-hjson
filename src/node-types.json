@@ -117,26 +117,25 @@
       "required": false,
       "types": [
         {
-          "type": "string_content",
+          "type": "string_with_punctuators",
+          "named": true
+        },
+        {
+          "type": "string_without_punctuators",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "string_content",
+    "type": "string_with_punctuators",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "escape_sequence",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
+  },
+  {
+    "type": "string_without_punctuators",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "\"",

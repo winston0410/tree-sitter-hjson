@@ -1,198 +1,26 @@
-===================
-Arrays
-===================
-
-[
-  345,
-  10.1,
-  10,
-  -10,
-  null,
-  true,
-  false,
-  { "stuff": "good" }
-]
-
----
-
-(document (array
-  (number)
-  (number)
-  (number)
-  (number)
-  (null)
-  (true)
-  (false)
-  (object (pair (string (string_content)) (string (string_content))))))
-
-===================
-Arrays without comma
-===================
-
-[
-  345
-  10.1
-  10
-  -10
-  null
-  true
-  false
-  { "stuff": "good" }
-]
-
----
-
-(document (array
-  (number)
-  (number)
-  (number)
-  (number)
-  (null)
-  (true)
-  (false)
-  (object (pair (string (string_content)) (string (string_content))))))
-
-=====================
-String content
-=====================
-
-[
-  "",
-  "abc",
-  "def\n",
-  "ghi\t"
-]
-
-----
-
-(document
-  (array
-    (string)
-    (string (string_content))
-    (string (string_content (escape_sequence)))
-    (string (string_content (escape_sequence)))))
-
-=====================
-String content without quote
-=====================
-
-[
-  "",
-  abc,
-]
-
-----
-
-(document
-  (array
-    (string)
-    (string (string_content))
-
 ======================
 Object key without quotes
 ======================
 
 {
-  foo: bar
+  foo: "bar"
 }
 
 ---
 
-(document
-  (object (pair (string (string_content)) (string (string_content)))))
-
-================================
-Top-level numbers
-================================
-
--1
-
----
-
-(document (number))
-
-================================
-Top-level null
-================================
-
-null
-
----
-
-(document (null))
-
-==============
-Just a Comment
-==============
-
-// Hello there!
-
-----
-
-(document
-  (comment))
-
-
-==============
-Just a Hash Comment
-==============
-
-# Hello there!
-
-----
-
-(document
-  (comment))
-
-=================
-Comment in object
-=================
-
-{
-  "something": 0,
-  /* Hello there!
-  */
-  "another": 1
-}
-
-----
-
-(document
-  (object
-    (pair (string (string_content)) (number))
-    (comment)
-    (pair (string (string_content)) (number))
-    ))
+(document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
 
 ======================
-Comment outside object
+Object value without quotes
 ======================
 
-// I'm a comment
-
 {
-  "foo": "bar"
+  "foo": bar
 }
 
 ---
 
-(document
-  (comment)
-  (object (pair (string (string_content)) (string (string_content)))))
-
-====================
-Comment inside array
-====================
-
-[
-  // Comment
-  "one"
-]
-
----
-
-(document
-  (array (comment) (string (string_content))))
+(document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
 
 ====================
 Hash Comment inside array
@@ -206,4 +34,4 @@ Hash Comment inside array
 ---
 
 (document
-  (array (comment) (string (string_content))))
+  (array (comment) (string (string_without_punctuators))))

@@ -4,22 +4,21 @@ module.exports = grammar(jsonc, {
   name: "hjson",
 
   rules: {
-    //  document: ($, original) => {
-      //  return optional($._value);
-    //  },
+    string_without_punctuators: ($) =>
+      repeat1(token.immediate(/[^\{\}\[\],:\\\"\n]+/)),
 
-    //  object: ($, original) => original,
+    string_with_punctuators: ($) => repeat1(token.immediate(/[^\\\"\n]+/)),
 
-    //  array: ($, original) => original,
-
-    //  number: ($, original) => original,
-
-    //  true: ($, original) => original,
-
-    //  false: ($, original) => original,
-
-    //  null: ($, original) => original,
-    //
+    string: ($, original) =>
+      choice(
+        seq('"', '"'),
+        seq(
+          '"',
+          choice($.string_without_punctuators, $.string_with_punctuators),
+          '"'
+        ),
+        $.string_without_punctuators
+      ),
 
     comment: ($, original) => {
       return token(choice(original, seq("#", /.*/)));
