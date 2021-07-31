@@ -1,20 +1,28 @@
-const json = require("tree-sitter-json/grammar");
+const jsonc = require("tree-sitter-jsonc/grammar");
 
-module.exports = grammar(json, {
+module.exports = grammar(jsonc, {
   name: "hjson",
 
-  extras: ($, original) => [...original, $.comment],
-
   rules: {
-    document: ($, original) => optional(original),
+    //  document: ($, original) => {
+      //  return optional($._value);
+    //  },
 
-    comment: ($) =>
-      token(
-        choice(
-          seq("#", /.*/),
-          seq("//", /.*/),
-          seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/")
-        )
-      ),
+    //  object: ($, original) => original,
+
+    //  array: ($, original) => original,
+
+    //  number: ($, original) => original,
+
+    //  true: ($, original) => original,
+
+    //  false: ($, original) => original,
+
+    //  null: ($, original) => original,
+    //
+
+    comment: ($, original) => {
+      return token(choice(original, seq("#", /.*/)));
+    },
   },
 });

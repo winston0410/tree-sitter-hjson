@@ -13,7 +13,8 @@
   "license": "MIT",
   "dependencies": {
     "nan": "^2.14.2",
-    "tree-sitter-json": "^0.19.0"
+    "tree-sitter-json": "^0.19.0",
+    "tree-sitter-jsonc": "^0.3.0"
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.19.2"
