@@ -66,13 +66,13 @@ Object of multiple fields with trailing comma
 ======================
 
 {
-  "foo": bar,
-  "hello": world,
+  "foo": "bar",
+  "hello": "world",
 }
 
 ---
 
-(document (object (pair (string (quoted_string)) (string (quoteless_string))) (pair (string (quoted_string)) (string (quoteless_string)))))
+(document (object (pair (string (quoted_string)) (string (quoted_string))) (pair (string (quoted_string)) (string (quoted_string)))))
 
 ======================
 Array with trailing comma
@@ -111,6 +111,19 @@ Array with multiple items without comma
 ---
 
 (document (array (false) (null)))
+
+======================
+Object of multiple fields without comma
+======================
+
+{
+  "foo": "bar"
+  "hello": "world"
+}
+
+---
+
+(document (object (pair (string (quoted_string)) (string (quoted_string))) (pair (string (quoted_string)) (string (quoted_string)))))
 
 ======================
 Single quote string

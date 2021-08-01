@@ -9,7 +9,7 @@ Heavily based on [tree-sitter-json](https://github.com/tree-sitter/tree-sitter-j
 
 [x] Handle trailing commas
 
-[ ] Handle omitting commas
+[x] Handle omitting commas
 
 [x] Handle multiline strings
 
