@@ -34,7 +34,7 @@ Object without comma
 
 ---
 
-(document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators)))(pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
+(document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators))) (pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
 
 
 ======================

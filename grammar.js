@@ -32,7 +32,7 @@ module.exports = grammar(jsonc, {
 
 function lineBreakOrComma1(rule) {
   //  return seq(rule, repeat(choice(seq(",", rule), seq("\n", rule))));
-  return seq(rule, repeat(choice(",", seq(",", rule))));
+  return seq(rule, choice(optional(","), repeat(seq(",", rule))));
 }
 
 function lineBreakOrComma(rule) {
