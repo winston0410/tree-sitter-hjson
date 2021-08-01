@@ -3,7 +3,7 @@ Object key without quotes
 ======================
 
 {
-  foo: "bar"
+  "foo": "bar"
 }
 
 ---
@@ -48,6 +48,44 @@ Object with trailing comma
 ---
 
 (document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
+
+======================
+Object of multiple fields with trailing comma
+======================
+
+{
+  "foo": bar,
+  "hello": world,
+}
+
+---
+
+(document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators))) (pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
+
+======================
+Array with trailing comma
+======================
+
+[
+  false,
+]
+
+---
+
+(document (array (false)))
+
+======================
+Array with multiple items with trailing comma
+======================
+
+[
+  false,
+  true,
+]
+
+---
+
+(document (array (false) (true)))
 
 ====================
 Hash Comment inside array
