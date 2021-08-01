@@ -8,7 +8,7 @@ Object key without quotes
 
 ---
 
-(document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
+(document (object (pair (string (quoted_string)) (string (quoted_string)))))
 
 ======================
 Object value without quotes
@@ -20,7 +20,7 @@ Object value without quotes
 
 ---
 
-(document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
+(document (object (pair (string (quoted_string)) (string (quoteless_string)))))
 
 
 ======================
@@ -34,7 +34,7 @@ Object without comma
 
 ---
 
-(document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators))) (pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
+(document (object (pair (string (quoted_string)) (string (quoteless_string))) (pair (string (quoted_string)) (string (quoteless_string)))))
 
 
 ======================
@@ -47,7 +47,7 @@ Object with trailing comma
 
 ---
 
-(document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
+(document (object (pair (string (quoted_string)) (string (quoteless_string)))))
 
 ======================
 Object of multiple fields with trailing comma
@@ -60,7 +60,7 @@ Object of multiple fields with trailing comma
 
 ---
 
-(document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators))) (pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
+(document (object (pair (string (quoted_string)) (string (quoteless_string))) (pair (string (quoted_string)) (string (quoteless_string)))))
 
 ======================
 Array with trailing comma
@@ -97,7 +97,22 @@ Single quote string
 
 ---
 
-(document (array (string (string_without_punctuators))))
+(document (array (string (quoted_string))))
+
+
+======================
+Multiline string
+======================
+
+{
+  "foo": '''
+  bar
+  '''
+}
+
+---
+
+(document (object (pair (string (quoted_string)) (string (multiline_string)))))
 
 ====================
 Hash Comment inside array
@@ -111,4 +126,4 @@ Hash Comment inside array
 ---
 
 (document
-  (array (comment) (string (string_without_punctuators))))
+  (array (comment) (string (quoted_string))))
