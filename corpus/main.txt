@@ -87,6 +87,18 @@ Array with multiple items with trailing comma
 
 (document (array (false) (true)))
 
+======================
+Single quote string
+======================
+
+[
+  'hello'
+]
+
+---
+
+(document (array (string (string_without_punctuators))))
+
 ====================
 Hash Comment inside array
 ====================

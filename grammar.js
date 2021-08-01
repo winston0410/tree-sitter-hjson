@@ -5,7 +5,7 @@ module.exports = grammar(jsonc, {
 
   rules: {
     _value: (_, original) => original,
-      
+
     pair: (_, original) => original,
 
     object: ($) => seq("{", lineBreakOrComma($.pair), "}"),
@@ -13,17 +13,23 @@ module.exports = grammar(jsonc, {
     array: ($) => seq("[", lineBreakOrComma($._value), "]"),
 
     string_without_punctuators: ($) =>
-      repeat1(token.immediate(/[^\{\}\[\],:\\\"\n]+/)),
+      repeat1(token.immediate(/[^\{\}\[\],:\\\"\'\n]+/)),
 
-    string_with_punctuators: ($) => repeat1(token.immediate(/[^\\\"\n]+/)),
+    string_with_punctuators: ($) => repeat1(token.immediate(/[^\\\"\'\n]+/)),
 
     string: ($, original) =>
       choice(
         seq('"', '"'),
+        seq("'", "'"),
         seq(
           '"',
           choice($.string_without_punctuators, $.string_with_punctuators),
           '"'
+        ),
+        seq(
+          "'",
+          choice($.string_without_punctuators, $.string_with_punctuators),
+          "'"
         ),
         $.string_without_punctuators
       ),
