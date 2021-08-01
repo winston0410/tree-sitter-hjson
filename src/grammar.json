@@ -64,37 +64,28 @@
                   "name": "pair"
                 },
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "STRING",
-                          "value": ","
-                        },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "REPEAT",
-                      "content": {
-                        "type": "SEQ",
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "CHOICE",
                         "members": [
-                          {
-                            "type": "STRING",
-                            "value": ","
-                          },
                           {
                             "type": "SYMBOL",
                             "name": "pair"
+                          },
+                          {
+                            "type": "BLANK"
                           }
                         ]
                       }
-                    }
-                  ]
+                    ]
+                  }
                 }
               ]
             },
@@ -170,8 +161,16 @@
                         "value": ","
                       },
                       {
-                        "type": "SYMBOL",
-                        "name": "_value"
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "_value"
+                          },
+                          {
+                            "type": "BLANK"
+                          }
+                        ]
                       }
                     ]
                   }
