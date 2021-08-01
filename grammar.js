@@ -10,26 +10,30 @@ module.exports = grammar(jsonc, {
 
     object: ($) => seq("{", lineBreakOrComma($.pair), "}"),
 
-    string: ($, original) =>
-      choice($.quoted_string, $.multiline_string),
-      //  choice($.quoted_string, $.multiline_string, $.quoteless_string),
+    string: ($, original) => choice($.quoted_string, $.multiline_string),
+    //  choice($.quoted_string, $.multiline_string, $.quoteless_string),
 
     array: ($) => seq("[", lineBreakOrComma($._value), "]"),
 
     quoted_string: ($) =>
       choice(
+        seq('"', '"'),
+        seq("'", "'"),
         seq('"', $._quoted_string_content, '"'),
         seq("'", $._quoted_string_content, "'")
       ),
 
+    //  Use repeat1 here instead of repeat, as treesitter doesn't support matching with empty string
     _quoted_string_content: ($) =>
-      repeat(choice(token.immediate(/[^\\"\'\n]+/), $.escape_sequence)),
+      repeat1(choice(token.immediate(/[^\\"\'\n]+/), $.escape_sequence)),
 
     //  quoteless string is conflicting with quoted string
     //  quoteless_string: ($) => repeat1(/[^\n]+/),
 
-    multiline_string: ($) => seq("'''", repeat(/[^\\"\'\n]+/), "'''"),
+    multiline_string: ($) =>
+      choice(seq("'''", "'''"), seq("'''", repeat1(/[^\\"\'\n]+/), "'''")),
 
+    //  escape_sequence: ($) => token.immediate(seq("\\", /(\"|\'|\\|\/|b|f|n|r|t|u)/)),
     escape_sequence: ($, original) => original,
 
     comment: ($, original) => token(choice(original, seq("#", /.*/))),
@@ -37,7 +41,7 @@ module.exports = grammar(jsonc, {
 });
 
 function lineBreakOrComma1(rule) {
-  return seq(rule, repeat(seq(",", optional(rule))));
+  return seq(rule, repeat(seq(/,|\n/, optional(rule))));
 }
 
 function lineBreakOrComma(rule) {

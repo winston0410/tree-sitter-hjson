@@ -1,4 +1,16 @@
 ======================
+Escape sequences in quoted string
+======================
+
+[
+  '\"\'\\\/\b\f\n\r\t\u'
+]
+
+---
+
+(document (array (string (quoted_string))))
+
+======================
 Object key without quotes
 ======================
 
@@ -86,6 +98,19 @@ Array with multiple items with trailing comma
 ---
 
 (document (array (false) (true)))
+
+======================
+Array with multiple items without comma
+======================
+
+[
+  false
+  null
+]
+
+---
+
+(document (array (false) (null)))
 
 ======================
 Single quote string
