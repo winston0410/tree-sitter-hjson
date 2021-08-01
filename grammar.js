@@ -10,39 +10,33 @@ module.exports = grammar(jsonc, {
 
     object: ($) => seq("{", lineBreakOrComma($.pair), "}"),
 
+    string: ($, original) =>
+      choice($.quoted_string, $.multiline_string),
+      //  choice($.quoted_string, $.multiline_string, $.quoteless_string),
+
     array: ($) => seq("[", lineBreakOrComma($._value), "]"),
 
-    string_without_punctuators: ($) =>
-      repeat1(token.immediate(/[^\{\}\[\],:\\\"\'\n]+/)),
-
-    string_with_punctuators: ($) => repeat1(token.immediate(/[^\\\"\'\n]+/)),
-
-    string: ($, original) =>
+    quoted_string: ($) =>
       choice(
-        seq('"', '"'),
-        seq("'", "'"),
-        seq(
-          '"',
-          choice($.string_without_punctuators, $.string_with_punctuators),
-          '"'
-        ),
-        seq(
-          "'",
-          choice($.string_without_punctuators, $.string_with_punctuators),
-          "'"
-        ),
-        $.string_without_punctuators
+        seq('"', $._quoted_string_content, '"'),
+        seq("'", $._quoted_string_content, "'")
       ),
 
-    comment: ($, original) => {
-      return token(choice(original, seq("#", /.*/)));
-    },
+    _quoted_string_content: ($) =>
+      repeat(choice(token.immediate(/[^\\"\'\n]+/), $.escape_sequence)),
+
+    //  quoteless string is conflicting with quoted string
+    //  quoteless_string: ($) => repeat1(/[^\n]+/),
+
+    multiline_string: ($) => seq("'''", repeat(/[^\\"\'\n]+/), "'''"),
+
+    escape_sequence: ($, original) => original,
+
+    comment: ($, original) => token(choice(original, seq("#", /.*/))),
   },
 });
 
 function lineBreakOrComma1(rule) {
-  //  TODO: fix test for omitting comma
-  //  return seq(rule, choice(optional(","), repeat(seq(",", rule))));
   return seq(rule, repeat(seq(",", optional(rule))));
 }
 
