@@ -3,3 +3,4 @@ node_modules
 .ccls-cache
 build
 /target/
+log.html
