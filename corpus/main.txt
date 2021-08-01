@@ -22,6 +22,33 @@ Object value without quotes
 
 (document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
 
+
+======================
+Object without comma
+======================
+
+{
+  "foo": bar
+  "hello": world
+}
+
+---
+
+(document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators)))(pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
+
+
+======================
+Object with trailing comma
+======================
+
+{
+  "foo": bar,
+}
+
+---
+
+(document (object (pair (string (string_without_punctuators)) (string (string_without_punctuators)))))
+
 ====================
 Hash Comment inside array
 ====================

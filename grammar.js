@@ -4,6 +4,10 @@ module.exports = grammar(jsonc, {
   name: "hjson",
 
   rules: {
+    pair: (_, original) => original,
+
+    object: ($) => seq("{", lineBreakOrComma($.pair), "}"),
+
     string_without_punctuators: ($) =>
       repeat1(token.immediate(/[^\{\}\[\],:\\\"\n]+/)),
 
@@ -25,3 +29,12 @@ module.exports = grammar(jsonc, {
     },
   },
 });
+
+function lineBreakOrComma1(rule) {
+  //  return seq(rule, repeat(choice(seq(",", rule), seq("\n", rule))));
+  return seq(rule, repeat(choice(",", seq(",", rule))));
+}
+
+function lineBreakOrComma(rule) {
+  return optional(lineBreakOrComma1(rule));
+}
