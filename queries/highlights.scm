@@ -7,3 +7,5 @@
   "{" @escape
   (_)
   "}" @escape)
+
+(comment) @comment
